@@ -1,4 +1,4 @@
-# EHF Schemas
+# EHF Specific Schemas
 
 This folder contains schemas created to supplement existing schemas.
 
