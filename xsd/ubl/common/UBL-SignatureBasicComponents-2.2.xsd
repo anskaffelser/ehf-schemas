@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+   Modifications:
+   * Elements points directly to qdt/udt namespace rather than an extra layer of type definitions.
+-->
+<!--
   Library:           OASIS Universal Business Language (UBL) 2.2 OS
                      http://docs.oasis-open.org/ubl/os-UBL-2.2/
   Release Date:      09 July 2018
@@ -19,12 +23,7 @@
                schemaLocation="UBL-QualifiedDataTypes-2.2.xsd"/>
    <xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2"
                schemaLocation="UBL-UnqualifiedDataTypes-2.2.xsd"/>
-   <xsd:element name="ReferencedSignatureID" type="ReferencedSignatureIDType"/>
-   <xsd:complexType name="ReferencedSignatureIDType">
-      <xsd:simpleContent>
-         <xsd:restriction base="udt:IdentifierType"/>
-      </xsd:simpleContent>
-   </xsd:complexType>
+   <xsd:element name="ReferencedSignatureID" type="udt:IdentifierType"/>
 </xsd:schema>
 <!-- ===== Copyright Notice ===== -->
 <!--
