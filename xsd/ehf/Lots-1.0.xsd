@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns="urn:fdc:difi.no:2017:vefa:espd:Lots-1"
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            targetNamespace="urn:fdc:difi.no:2017:vefa:espd:Lots-1"
-            elementFormDefault="qualified" version="1.0">
+<xs:schema xmlns="urn:fdc:difi.no:2017:vefa:espd:Lots-1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:fdc:difi.no:2017:vefa:espd:Lots-1"
+           elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
 
-    <xsd:element name="Lots" type="LotsType"/>
+    <xs:element name="Lots" type="LotsType"/>
 
-    <xsd:complexType name="LotsType">
-        <xsd:sequence>
-            <xsd:element name="VersionID" type="xsd:string"/>
-            <xsd:element name="Lot" type="LotType" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
+    <xs:complexType name="LotsType">
+        <xs:sequence>
+            <xs:element name="VersionID" type="xs:string"/>
+            <xs:element name="Lot" type="LotType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
 
-    <xsd:complexType name="LotType">
-        <xsd:sequence>
-            <xsd:element name="ID" type="xsd:string"/>
-            <xsd:element name="Title" type="xsd:string"/>
-            <xsd:element name="Description" type="xsd:element" minOccurs="0"/>
-            <xsd:element name="OptionalCritierias" type="OptionalCriteriasType" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
+    <xs:complexType name="LotType">
+        <xs:sequence>
+            <xs:element name="ID" type="xs:string"/>
+            <xs:element name="Title" type="xs:string"/>
+            <xs:element name="Description" type="xs:string" minOccurs="0"/>
+            <xs:element name="OptionalCritierias" type="OptionalCriteriasType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
 
-    <xsd:complexType name="OptionalCriteriasType">
-        <xsd:sequence>
-            <xsd:element name="ID" type="xsd:string" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
+    <xs:complexType name="OptionalCriteriasType">
+        <xs:sequence>
+            <xs:element name="ID" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
 
-</xsd:schema>
+</xs:schema>
