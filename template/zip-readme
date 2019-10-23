@@ -1,0 +1,9 @@
+# EHF SCHEMAS
+
+Version   : ${VERSION}
+Build time: ${TIMESTAMP}
+
+This zip contains XSDs used to develop EHF instance documents.
+
+Up to date versions may be found here:
+https://github.com/anskaffelser/ehf-schemas
