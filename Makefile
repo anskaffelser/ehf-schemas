@@ -25,6 +25,7 @@ validator:
 		ehf \
 		sbdh/StandardBusinessDocumentHeader.xsd \
 		ubl/maindoc \
+		xhe \
 		> $(PROJECT)/xsd/_includes.xsd
 	@docker run --rm -i \
 		-v $(PROJECT):/src \
