@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns="urn:fdc:anskaffelser.no:2019:ehf:schema:ParticipantList-1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:fdc:anskaffelser.no:2019:ehf:schema:ParticipantList-1"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           version="1.0">
+
+    <xs:element name="ParticipantList" type="ParticipantListType"/>
+
+    <xs:complexType name="ParticipantListType">
+        <xs:sequence>
+            <xs:element name="CustomizationID" type="IdentifierType" minOccurs="0"/>
+            <xs:element name="ProfileID" type="IdentifierType" minOccurs="0"/>
+
+            <xs:element name="ID" type="xs:token"/>
+            <xs:element name="UUID" type="xs:token" minOccurs="0"/>
+
+            <xs:element name="IssueDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="IssueTime" type="xs:time" minOccurs="0"/>
+
+            <xs:element name="SenderParty" type="PartyType" minOccurs="0"/>
+            <xs:element name="ReceiverParty" type="PartyType" minOccurs="0"/>
+
+            <xs:element name="FolderReference" type="ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="AdditionReference" type="ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="ParticipatingParty" type="ParticipatingPartyType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ParticipatingPartyType">
+        <xs:sequence>
+            <xs:element name="Party" type="PartyType"/>
+            <xs:element name="FolderReference" type="ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="AdditionReference" type="ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PartyType">
+        <xs:sequence>
+            <xs:element name="EndpointID" type="IdentifierType" minOccurs="0"/>
+            <xs:element name="Name" type="xs:string" minOccurs="0"/>
+            <xs:element name="Contact" type="ContactType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ContactType">
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string" minOccurs="0"/>
+            <xs:element name="Telephone" type="xs:token" minOccurs="0"/>
+            <xs:element name="ElectronicMail" type="xs:token" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IdentifierType">
+        <xs:simpleContent>
+            <xs:extension base="xs:token">
+                <xs:attribute name="scheme" type="xs:token"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="ReferenceType">
+        <xs:sequence>
+            <xs:element name="ID" type="IdentifierType"/>
+            <xs:element name="Type" type="xs:token" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
