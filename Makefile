@@ -29,5 +29,5 @@ validator:
 		> $(PROJECT)/xsd/_includes.xsd
 	@docker run --rm -i \
 		-v $(PROJECT):/src \
-		difi/vefa-validator \
+		anskaffelser/validator:2.1.0 \
 		build -x -n no.anskaffelser.ehf.schemas -b $(VERSION) /src
