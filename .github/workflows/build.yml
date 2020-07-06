@@ -25,6 +25,10 @@ jobs:
       - name: Build validation artifact
         run: make validator
 
+      - uses: actions/upload-artifact@v2
+        with:
+          path: target
+
       - name: Upload XSD package
         uses: klakegg/github-upload@v0.9.1
         if: startsWith(github.ref, 'refs/tags/')
