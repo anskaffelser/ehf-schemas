@@ -1,8 +1,3 @@
 .idea
 target
 *.iml
-
-/buildconfig.xml
-/xsd/README.md
-/xsd/_includes.xsd
-*.zip

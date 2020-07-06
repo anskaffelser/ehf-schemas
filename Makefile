@@ -1,33 +1,36 @@
+PATH=$(shell pwd)/src/bin:$(shell echo $$PATH)
+
 PROJECT = $(shell pwd)
 VERSION := $(if $(GITHUB_REF),$(shell echo "$(GITHUB_REF)" | sed "s:.*/::g"),snapshot)
 
-default: clean zip validator
+default: clean prepare zip validator
 
 clean:
-	@docker run --rm -i \
-		-v $(PROJECT):/src \
-		alpine:3.10 \
-		rm -rf \
-			/src/schemas.zip \
-			/src/buildconfig.xml \
-			/src/xsd/_includes.xsd \
-			/src/target
+	@rm -rf $(PROJECT)/target
+
+prepare:
+	@mkdir $(PROJECT)/target
+	@cp -r src/xsd $(PROJECT)/target/xsd
 
 zip:
 	@TIMESTAMP=$(shell date -u --iso-8601=seconds) \
-		VERSION=$(VERSION) \
-		envsubst < template/zip-readme > $(PROJECT)/xsd/README.md
-	@cd xsd && zip -r $(PROJECT)/schemas.zip README.md */*.xsd */*/*.xsd
+		# VERSION=$(VERSION) \
+		envsubst < src/template/zip-readme > $(PROJECT)/target/xsd/README.md
+	@cd target/xsd \
+	 && zip -q9r $(PROJECT)/target/schemas.zip README.md */*.xsd */*/*.xsd
 
 validator:
-	@sh $(PROJECT)/script/prepare_buildconfig.sh > $(PROJECT)/buildconfig.xml
-	@cd $(PROJECT)/xsd && sh $(PROJECT)/script/prepare_includes.sh \
+	@cd $(PROJECT)/src \
+	 && prepare_buildconfig > $(PROJECT)/target/buildconfig.xml
+	@cd $(PROJECT)/target/xsd && prepare_includes \
 		ehf \
 		sbdh/StandardBusinessDocumentHeader.xsd \
 		ubl/maindoc \
+		uncefact-cii/data/standard/CrossIndustryInvoice_100pD16B.xsd \
 		xhe/XHE-1.0.xsd \
-		> $(PROJECT)/xsd/_includes.xsd
+		> _includes.xsd
 	@docker run --rm -i \
 		-v $(PROJECT):/src \
+		-u $$(id -u) \
 		anskaffelser/validator:2.1.0 \
-		build -x -n no.anskaffelser.ehf.schemas -b $(VERSION) /src
+		build -x -n no.anskaffelser.ehf.schemas -b $(VERSION) -target /src/target/validator /src

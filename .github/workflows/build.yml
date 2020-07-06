@@ -16,6 +16,9 @@ jobs:
         with:
           script: xc --xsd-1.0 **/*.xsd
 
+      - name: Prepare
+        run: make prepare
+
       - name: Create zip file
         run: make zip
 
@@ -28,7 +31,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: "schemas.zip"
+          file: "target/schemas.zip"
           name: "ehf-schemas-${TAG}.zip"
           label: "Package containing XSD files (zip)"
 
@@ -38,6 +41,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: "target/no.anskaffelser.ehf.schemas-${TAG}.asice"
+          file: "target/validator/no.anskaffelser.ehf.schemas-${TAG}.asice"
           label: "Validation artifacts for VEFA Validator 2.x"
           type: "application/vnd.difi.validator.v2+zip"
