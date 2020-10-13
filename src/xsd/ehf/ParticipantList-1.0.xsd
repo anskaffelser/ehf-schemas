@@ -39,8 +39,10 @@
 
     <xs:complexType name="PartyType">
         <xs:sequence>
+            <xs:element name="CompanyID" type="IdentifierType" minOccurs="0"/>
             <xs:element name="EndpointID" type="IdentifierType" minOccurs="0"/>
             <xs:element name="Name" type="xs:string" minOccurs="0"/>
+            <xs:element name="ElectronicMail" type="xs:token" minOccurs="0"/>
             <xs:element name="Contact" type="ContactType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
