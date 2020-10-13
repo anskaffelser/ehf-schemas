@@ -2,6 +2,9 @@ PATH=$(shell pwd)/src/bin:$(shell echo $$PATH)
 
 PROJECT = $(shell pwd)
 VERSION := $(if $(GITHUB_REF),$(shell echo "$(GITHUB_REF)" | sed "s:.*/::g"),snapshot)
+TIMESTAMP_UNIX = $(shell date -u +%s)
+TIMESTAMP = $(shell date -u --date=@$(TIMESTAMP_UNIX) --iso-8601=seconds)
+TIMESTAMP_SHORT = $(shell date -u --date=@$(TIMESTAMP_UNIX) +%Y%m%d-%H%M%Sz)
 
 default: clean prepare zip validator
 
@@ -13,7 +16,7 @@ prepare:
 	@cp -r src/xsd $(PROJECT)/target/xsd
 
 zip:
-	@TIMESTAMP=$(shell date -u --iso-8601=seconds) \
+	@TIMESTAMP=$(TIMESTAMP) \
 		# VERSION=$(VERSION) \
 		envsubst < src/template/zip-readme > $(PROJECT)/target/xsd/README.md
 	@cd target/xsd \
