@@ -7,11 +7,11 @@ for qu in $@; do
   for f in $(find $qu -type f -name '*.xsd' | sort); do
     ns=$(cat $f | grep targetNamespace | head -1 | sed "s:(.*)targetNamespace=\"::" | cut -d '"' -f 2)
 
-    echo -n "\t"
-    echo -n '<xs:import schemaLocation="'
-    echo -n $f
-    echo -n '" namespace="'
-    echo -n $ns
+    printf "\t"
+    printf '<xs:import schemaLocation="'
+    printf $f
+    printf '" namespace="'
+    printf $ns
     echo '"/>'
   done
 done

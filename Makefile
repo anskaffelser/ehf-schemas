@@ -35,5 +35,5 @@ validator:
 	@docker run --rm -i \
 		-v $(PROJECT):/src \
 		-u $$(id -u) \
-		anskaffelser/validator:2.1.0 \
+		anskaffelser/validator:edge \
 		build -x -n no.anskaffelser.ehf.schemas -b $(VERSION) -target /src/target/validator /src
